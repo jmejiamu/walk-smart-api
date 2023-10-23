@@ -1,5 +1,7 @@
 import express from "express";
 import { Event } from "../../../entities/event-entity";
+import { logger } from "../../../utils/logger";
+import { HttpStatusCode } from "../../../utils/status-code";
 
 const router = express.Router();
 
@@ -15,10 +17,12 @@ router.post("/api-v1/events", async (req, res) => {
       timeStamp,
     });
     await event.save();
-    res.status(200).json({ message: "Event saved" });
+    res.status(HttpStatusCode.OK).json({ message: "Event saved" });
   } catch (error) {
-    console.error(error);
-    res.status(400).json({ message: "Internal server error" });
+    logger.error(error);
+    res
+      .status(HttpStatusCode.INTERNAL_SERVER)
+      .json({ message: "Internal server error" });
   }
 });
 
