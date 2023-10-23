@@ -2,6 +2,7 @@ import { DataSource } from "typeorm";
 import dotenv from "dotenv";
 dotenv.config();
 import { Event } from "./entities/event-entity";
+import { logger } from "./utils/logger";
 
 const dbConnection = async () => {
   const port = Number(process.env.PORT);
@@ -19,7 +20,7 @@ const dbConnection = async () => {
     });
     await dataSource.initialize();
 
-    console.log("Connected to postgres db ....");
+    logger.info("Connected to postgres db ....");
   } catch (error) {
     console.error(
       error,
