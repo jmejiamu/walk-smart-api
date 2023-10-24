@@ -5,7 +5,7 @@ import { HttpStatusCode } from "../../../utils/status-code";
 
 const router = express.Router();
 
-router.post("/api-v1/events", async (req, res) => {
+router.post("/events", async (req, res) => {
   try {
     const { latitude, longitude, eventTitle, eventDescription, timeStamp } =
       req.body;
@@ -26,4 +26,4 @@ router.post("/api-v1/events", async (req, res) => {
   }
 });
 
-export { router as eventsRoute };
+export default router;
