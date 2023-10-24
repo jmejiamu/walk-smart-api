@@ -1,9 +1,9 @@
-import { eventsRoute } from "./Routes/post/events";
+import router from "./Routes/post/events";
 import dbConnection from "./data-source";
 import express from "express";
 const app = express();
 app.use(express.json());
-app.use(eventsRoute);
+app.use("api-v1", router);
 dbConnection();
 
 app.listen(3000, () => {
