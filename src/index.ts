@@ -1,10 +1,10 @@
-import { eventsRoute } from "./Routes/post/events";
+import router from "./Routes/post/events";
 import dbConnection from "./data-source";
 import express from "express";
 import { logger } from "./utils/logger";
 const app = express();
 app.use(express.json());
-app.use(eventsRoute);
+app.use("/api-v1", router);
 dbConnection();
 
 const PORT = process.env.SERVER_PORT || 8080;
