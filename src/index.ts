@@ -4,12 +4,13 @@ import { logger } from "./utils/logger";
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
+import { protect } from "./utils/auth";
 
 const app = express();
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
-app.use("/api-v1", router);
+app.use("/api-v1", protect, router);
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors());
