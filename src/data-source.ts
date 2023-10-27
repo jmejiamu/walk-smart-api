@@ -2,32 +2,52 @@ import { DataSource } from "typeorm";
 import dotenv from "dotenv";
 dotenv.config();
 import { Event } from "./entities/event-entity";
-import { logger } from "./utils/logger";
+// import { logger } from "./utils/logger"; // uncomment use for your connection
+import { Register, Signin } from "./entities/auth-entity";
 
-const dbConnection = async () => {
-  const port = Number(process.env.PORT);
+// NOTE: connection setting url reference --> https://orkhan.gitbook.io/typeorm/docs/data-source
 
-  try {
-    const dataSource = new DataSource({
-      type: "postgres",
-      host: process.env.HOST,
-      port: port,
-      username: process.env.USERNAME,
-      password: process.env.PASSWORD,
-      database: process.env.DATABASE,
-      entities: [Event],
-      synchronize: true,
-    });
-    await dataSource.initialize();
+const port = Number(process.env.PORT);
 
-    logger.info("Connected to postgres db ....");
-  } catch (error) {
-    console.error(
-      error,
-      "File: data-source.ts - Unable to connect to postgres DB"
-    );
-    throw new Error("Unable to connect to the Database");
-  }
-};
+export const dataSource = new DataSource({
+  type: "postgres",
+  host: process.env.HOST,
+  port: port,
+  username: process.env.USERNAME,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
+  entities: [Event, Register, Signin],
+  synchronize: true,
+});
 
-export default dbConnection;
+
+// **** Note use this for your connection ****
+
+// export const dbConnection = async () => {
+//   const port = Number(process.env.PORT);
+
+//   try {
+//     const dataSource = new DataSource({
+//       type: "postgres",
+//       host: process.env.HOST,
+//       port: port,
+//       username: process.env.USERNAME,
+//       password: process.env.PASSWORD,
+//       database: process.env.DATABASE,
+//       entities: [Event, Register],
+//       synchronize: true,
+//     });
+//     logger.info("set connection and database.")
+//     // logger.info("Connected to postgres db ....");
+//    const source = await dataSource;
+//     return source;
+//   } catch (error) {
+//     console.error(
+//       error,
+//       "File: data-source.ts - Unable to connect to postgres DB"
+//     );
+//     throw new Error("Unable to connect to the Database");
+//   }
+// };
+
+// export default dbConnection;
