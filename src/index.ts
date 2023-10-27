@@ -6,14 +6,18 @@ import { logger } from "./utils/logger";
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
+
 import { dataSource } from "./data-source";
+
 
 const app = express();
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
+
 app.use("/api-v1", router);
 app.use("/api-v1", auth);
+
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors());
