@@ -3,8 +3,7 @@ import { HttpStatusCode } from "./status-code";
 import bcrypt from "bcrypt";
 
 interface IUser {
-  id: number;
-  username: string;
+  email: string;
 }
 
 export const comparePassword = (password: string, hash: string) => {
@@ -15,18 +14,18 @@ export const hashPassword = (password: string) => {
   const salt = bcrypt.genSaltSync(10);
   return bcrypt.hash(password, salt);
 };
-export const createJWT = (user: IUser) => {
+export const createJWT = (email: IUser) => {
   const secretJWT = process.env.JWT_SECRET as string;
   const token = jwt.sign(
     {
-      id: user.id,
-      username: user.username,
+      email,
     },
     secretJWT
   );
   return token;
 };
 
+// This is protecting the routes
 export const protect = (req: any, res: any, next: any) => {
   const bearer = req.headers.authorization;
   if (!bearer) {
