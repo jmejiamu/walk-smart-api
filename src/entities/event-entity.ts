@@ -4,9 +4,7 @@ import {
   PrimaryGeneratedColumn,
   BaseEntity,
   CreateDateColumn,
-  ManyToOne,
 } from "typeorm";
-import { Register } from "./auth-entity";
 
 @Entity("users_events")
 export class Event extends BaseEntity {
@@ -27,8 +25,4 @@ export class Event extends BaseEntity {
 
   @CreateDateColumn()
   timeStamp: Date;
-
-
-  @ManyToOne(() => Register, (register) => register.events)
-  register: Register;
 }
