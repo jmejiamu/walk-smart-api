@@ -12,7 +12,7 @@ export const comparePassword = (password: string, hash: string) => {
 
 export const hashPassword = (password: string) => {
   const salt = bcrypt.genSaltSync(10);
-  return bcrypt.hash(password, salt);
+  return bcrypt.hashSync(password, salt);
 };
 export const createJWT = (email: IUser) => {
   const secretJWT = process.env.JWT_SECRET as string;

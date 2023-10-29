@@ -14,9 +14,9 @@ export class Register extends BaseEntity {
     email: string;
 
     @Column()
-    password: string;
+    username: string;
 
-    @OneToMany(() => Event, (event) => event.register)
+    @OneToMany(() => Signin, (signin) => signin.signin)
     events: Event[];
 
     register:Register;
@@ -29,6 +29,9 @@ export class Signin extends BaseEntity {
 
     @Column()
     email: string;
+
+    @Column()
+    username: string; 
 
     @Column()
     password: string;
