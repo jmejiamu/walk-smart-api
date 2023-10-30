@@ -1,5 +1,4 @@
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Event } from "./event-entity";
 
 
 @Entity("register")
@@ -17,8 +16,6 @@ export class Register extends BaseEntity {
     username: string;
 
     @OneToMany(() => Signin, (signin) => signin.signin)
-    events: Event[];
-
     register:Register;
 }
 
