@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm";
 import dotenv from "dotenv";
 dotenv.config();
-import { Event } from "./entities/event-entity";
+import { Events, EventsLocations, JoinedEvents } from "./entities/event-entity";
 // import { logger } from "./utils/logger"; // uncomment use for your connection
 import { Register, Signin } from "./entities/auth-entity";
 
@@ -16,7 +16,13 @@ export const dataSource = new DataSource({
   username: process.env.USERNAME,
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
-  entities: [Event, Register, Signin],
+  entities: [
+    Register,
+    Signin,
+    Events,
+    EventsLocations,
+    JoinedEvents,
+  ],
   synchronize: true,
 });
 
