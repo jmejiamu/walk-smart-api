@@ -2,6 +2,7 @@ import router from "./Routes/post/events";
 import register from "./Routes/auth/register";
 import signin from "./Routes/auth/signin";
 import retriveEvents from "./Routes/post/retrive-events/retriveEvents";
+import retriveEventsById from "./Routes/post/retrive-events-by-id/retriveEventsById";
 // import dbConnection from "./data-source";
 
 import { logger } from "./utils/logger";
@@ -21,6 +22,7 @@ app.use("/api-v1", router);
 app.use("/api-v1", register);
 app.use("/api-v1", signin)
 app.use('/api-v1', retriveEvents)
+app.use('/api-v1', retriveEventsById)
 
 app.use(express.json());
 app.use(morgan("dev"));

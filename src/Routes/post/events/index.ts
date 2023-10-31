@@ -32,6 +32,10 @@ router.post("/events", async (req, res) => {
 
     const locationCoors = await source.manager.save(EventsLocations, eventLocation)
 
+    logger.info(`new event \n 
+        ${JSON.stringify({ event: { event, locationCoors } }, null, " ")}`
+    )
+
     return res
       .status(HttpStatusCode.OK)
       .json({
