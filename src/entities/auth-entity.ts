@@ -1,10 +1,10 @@
-import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity("register")
 export class Register extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryGeneratedColumn('uuid')
+    user_id: string;
 
     @Column()
     fullName: string;
@@ -21,8 +21,8 @@ export class Register extends BaseEntity {
 
 @Entity("signin")
 export class Signin extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number; 
+    @PrimaryColumn('uuid')
+    user_id: string; 
 
     @Column()
     email: string;

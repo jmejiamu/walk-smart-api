@@ -3,10 +3,12 @@ import { Register, Signin } from "../../entities/auth-entity";
 import { dataSource } from "../../data-source";
 import { HttpStatusCode } from "../../utils/status-code";
 import { createJWT, hashPassword } from "../../utils/auth";
+import { logger } from "../../utils/logger";
 
 const register = express.Router();
 
 interface userForm {
+  user_id?: string;
   fullName?: string;
   email?: string;
   username?: string;
@@ -42,24 +44,32 @@ register.post("/register", async (req: Request, res: Response) => {
       username,
     };
 
+    const user = await source.manager.save(Register, register);
+
     const signin: userForm = {
+      user_id: user.user_id,
       email,
       username,
       password: hashedPassword,
     };
 
-
-    await source.manager.save(Register, register);
     await source.manager.save(Signin, signin);
+
+    logger.info(`New user created \n 
+      ${JSON.stringify({ record: { user_id: user.user_id, username, created: "ok", fail: false, token } }, null, " ")}`,
+    )
 
     return res
       .status(HttpStatusCode.CREATED)
       .json({
         error: false,
-        record: { username, created: "ok", fail: false, token },
+        record: { user_id: user.user_id, username, created: "ok", fail: false, token },
       });
 
   } catch (e) {
+    logger.error(`Error register \n`,
+      JSON.stringify({ error: true, record: { created: "unable to create" } }, null, " ")
+    )
     return res
       .status(HttpStatusCode.BAD_REQUEST)
       .json({ error: true, record: { created: "unable to create" } });

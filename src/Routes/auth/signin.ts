@@ -3,12 +3,13 @@ import { dataSource } from "../../data-source";
 import { Signin } from "../../entities/auth-entity";
 import { HttpStatusCode } from "../../utils/status-code";
 import { comparePassword, createJWT } from "../../utils/auth";
+import { logger } from "../../utils/logger";
 
 const signin = express.Router();
 
 signin.post("/signin", async (req: Request, res: Response) => {
 
-    const { email,  password } = req.body
+    const { email, password } = req.body
 
     try {
         const source = dataSource.getRepository(Signin);
@@ -29,15 +30,21 @@ signin.post("/signin", async (req: Request, res: Response) => {
 
         const token = createJWT(email);
 
+        logger.info(`New signin \n 
+            ${JSON.stringify({ record: { user_id: user.user_id, username: user.username, fail: false, token } }, null, " ")}`
+        )
+
         return res
             .status(HttpStatusCode.OK)
             .json({
                 error: false,
-                record: { username: user.username, fail: false, token },
+                record: { user_id: user.user_id, username: user.username, fail: false, token },
             });
 
     } catch (error) {
-        console.log(error);
+        logger.error(`error signin \n
+            ${JSON.stringify({ error: true, record: { created: "unable to create" } }, null, " ")}`
+        )
         return res
             .status(HttpStatusCode.BAD_REQUEST)
             .json({ error: true, record: { created: "unable to create" } });

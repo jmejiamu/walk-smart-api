@@ -14,8 +14,8 @@ export class Events extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   event_id: string;
 
-  @Column()
-  user_id: number; 
+  @Column('uuid')
+  user_id: string; 
 
   @Column()
   event_title: string;
@@ -32,10 +32,10 @@ export class Events extends BaseEntity {
 
 @Entity("events_location")
 export class EventsLocations extends BaseEntity {
-  @Column()
-  user_id: number;
+  @Column('uuid')
+  user_id: string;
 
-  @PrimaryColumn()
+  @PrimaryColumn('uuid')
   event_id: string;
 
   @Column()

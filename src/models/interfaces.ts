@@ -1,14 +1,14 @@
 // Note the user_id will be update to use uuid 
 export interface Event {
     event_id?: string;
-    user_id: number; // this will change to uuid string uuid
+    user_id: string; // this will change to uuid string uuid
     event_title?: string;
     event_description?: string;
     time_stamp?: Date;
 }
 
 export interface EventLocation {
-    user_id?: number;
+    user_id?: string;
     event_id?: string;
     latitude?: string;
     longitude?: string;
@@ -16,7 +16,7 @@ export interface EventLocation {
 }
 
 export interface JoinedEvent {
-    user_id?: number;
+    user_id?: string;
     event_id?: string;
     joined?: boolean;
     time_stamp?: Date;
