@@ -38,11 +38,11 @@ export class EventsLocations extends BaseEntity {
   @PrimaryColumn('uuid')
   event_id: string;
 
-  @Column()
-  latitude: string;
+  @Column('real')
+  latitude: number;
 
-  @Column()
-  longitude: string;
+  @Column('real')
+  longitude: number;
 
   @CreateDateColumn()
   time_stamp: Date;

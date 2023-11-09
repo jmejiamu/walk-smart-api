@@ -25,8 +25,8 @@ router.post("/events", async (req, res) => {
     const eventLocation: EventLocation = {
       user_id: user_id,
       event_id: event.event_id,
-      latitude: latitude,
-      longitude: longitude,
+      latitude: Number(latitude),
+      longitude: Number(longitude),
       time_stamp: timeStamp
     }
 

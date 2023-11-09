@@ -10,8 +10,8 @@ export interface Event {
 export interface EventLocation {
     user_id?: string;
     event_id?: string;
-    latitude?: string;
-    longitude?: string;
+    latitude?: number;
+    longitude?: number;
     time_stamp?: Date;
 }
 
