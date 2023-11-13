@@ -11,6 +11,7 @@ import morgan from "morgan";
 import cors from "cors";
 
 import { dataSource } from "./data-source";
+import retrieveEventById from "./Routes/post/retrieve-event-by-id/retrieveEventById";
 
 
 const app = express();
@@ -23,6 +24,7 @@ app.use("/api-v1", register);
 app.use("/api-v1", signin)
 app.use('/api-v1', retriveEvents)
 app.use('/api-v1', retriveEventsById)
+app.use('/api-v1', retrieveEventById)
 
 app.use(express.json());
 app.use(morgan("dev"));

@@ -22,7 +22,6 @@ export interface JoinedEvent {
     time_stamp?: Date;
 }
 
-// For all events
 export interface Events {
     event: Event;
     location: EventLocation

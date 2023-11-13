@@ -1,19 +1,19 @@
 import express, { Request, Response } from "express";
 import { HttpStatusCode } from "../../../utils/status-code";
 import { dataSource } from "../../../data-source";
-import { Events } from "../../../models/interfaces";
 import { logger } from "../../../utils/logger";
 
 
 
 const retriveEventsById = express.Router();
-
+// retrieve all events creacted by user.
+// Get all events by user uuid
 retriveEventsById.get("/events/me", async (req: Request, res: Response) => {
 
     const user_id = req.query.user_id;
 
     try {
-        const events = await dataSource.query<Events>(`SELECT
+        const events = await dataSource.query(`SELECT
             DISTINCT ON (e.event_id)
                 e.event_id, 
                 e.user_id,
