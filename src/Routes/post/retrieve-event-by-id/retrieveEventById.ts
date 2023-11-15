@@ -20,7 +20,7 @@ retrieveEventById.get("/events/event", async (req: Request, res: Response) => {
             el.time_stamp
         FROM events AS e
         JOIN events_location AS el
-        ON e.user_id = el.user_id
+        ON e.event_id = el.event_id
         WHERE e.event_id = $1`, [event_id])
 
         logger.info(`users event \n${JSON.stringify(event, null, " ")}`)
