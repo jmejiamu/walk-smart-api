@@ -9,7 +9,9 @@ const retriveEventsById = express.Router();
 // retrieve all events creacted by user.
 // Get all events by user uuid
 retriveEventsById.get("/events/me", async (req: Request, res: Response) => {
-
+    
+    // http://localhost:8080/api-v1/events/me?user_id=026ed160-99b1-4427-92ab-4286ce51fb3f
+    
     const user_id = req.query.user_id;
 
     try {
