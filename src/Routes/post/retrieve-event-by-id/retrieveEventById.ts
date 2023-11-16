@@ -7,6 +7,9 @@ import { HttpStatusCode } from "../../../utils/status-code";
 const retrieveEventById = express.Router();
 
 retrieveEventById.get("/events/event", async (req: Request, res: Response) => {
+    
+    // http://localhost:8080/api-v1/events/event?event_id=9b168284-9da9-43ee-9546-231a9d0a9e51
+
     const event_id = req.query.event_id;
 
     try {
