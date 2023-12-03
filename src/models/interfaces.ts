@@ -16,10 +16,11 @@ export interface EventLocation {
 }
 
 export interface JoinedEvent {
+    join_id?: string;
     user_id?: string;
     event_id?: string;
     joined?: boolean;
-    time_stamp?: Date;
+    // time_stamp?: Date;
 }
 
 export interface Events {
