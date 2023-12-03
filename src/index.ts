@@ -13,6 +13,7 @@ import cors from "cors";
 import { dataSource } from "./data-source";
 import retrieveEventById from "./Routes/post/retrieve-event-by-id/retrieveEventById";
 import retrieveUserEventsByID from "./Routes/post/retrieve-user-events-by-id/retrieveUserEvents";
+import joinEvents from "./Routes/post/create-join-event/joinEvents";
 
 
 const app = express();
@@ -27,6 +28,7 @@ app.use('/api-v1', retriveEvents)
 app.use('/api-v1', retriveEventsById)
 app.use('/api-v1', retrieveEventById)
 app.use('/api-v1', retrieveUserEventsByID)
+app.use('/api-v1', joinEvents)
 
 app.use(express.json());
 app.use(morgan("dev"));

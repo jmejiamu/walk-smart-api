@@ -51,20 +51,25 @@ export class EventsLocations extends BaseEntity {
   event: Events; 
 }
 
+
 @Entity("joined_events")
 export class JoinedEvents extends BaseEntity {
-  @Column()
-  user_id: number;
+    @PrimaryGeneratedColumn("uuid")
+    join_id: string;
 
-  @PrimaryColumn()
-  event_id: string;
+    @Column("uuid")
+    user_id: string;
 
-  @Column()
-  joined: boolean;
+    @Column("uuid")
+    event_id: string;
 
-  @Column()
-  time_stamp: Date;
+    @Column('bool')
+    joined: boolean
 
-  @OneToMany(()=> JoinedEvents, (joinEvents) => joinEvents.event_id)
-  JoinedEvents: JoinedEvents;
+    @OneToMany(()=> EventsLocations, (ELocations) => ELocations.user_id)
+    EventsLocations : EventsLocations[]
+
+    @OneToMany(()=> Events, (events)=> events.event_id)
+    Events : Events[]
+
 }
