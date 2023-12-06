@@ -25,7 +25,7 @@ joinEvents.post("/join", async (req: Request, res: Response) => {
 
 
         if (event?.joined) {
-            return res.status(HttpStatusCode.BAD_REQUEST)
+            return res.status(HttpStatusCode.OK)
                 .json({ joined: true, message: "YOU ALREADY JOIN THIS EVENT" })
         }
 
