@@ -5,7 +5,7 @@ import { HttpStatusCode } from "../../../utils/status-code";
 
 
 const retrieveUserEventsByID = express.Router();
-
+//  I dont need this route?
 retrieveUserEventsByID.get('/events/all/me', async (req: Request, res: Response) => {
 
     // http://localhost:8080/api-v1/events/all/me?user_id=qwqsa-sadjaskl-dsakdjsk-53ww
