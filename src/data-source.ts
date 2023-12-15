@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm";
 import dotenv from "dotenv";
 dotenv.config();
-import { Events, EventsLocations, JoinedEvents } from "./entities/event-entity";
+import { Events, EventsLocations, JoinedEvents, JoinedCounter } from "./entities/event-entity";
 // import { logger } from "./utils/logger"; // uncomment use for your connection
 import { Register, Signin } from "./entities/auth-entity";
 
@@ -22,6 +22,7 @@ export const dataSource = new DataSource({
     Events,
     EventsLocations,
     JoinedEvents,
+    JoinedCounter,
   ],
   synchronize: true,
 });
