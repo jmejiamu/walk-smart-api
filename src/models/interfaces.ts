@@ -23,6 +23,12 @@ export interface JoinedEvent {
     // time_stamp?: Date;
 }
 
+export interface JoinCounter {
+    user_id?: string; // created by
+    event_id?: string;
+    counter?: number;
+}
+
 export interface Events {
     event: Event;
     location: EventLocation
