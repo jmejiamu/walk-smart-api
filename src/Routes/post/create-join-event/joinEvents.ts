@@ -97,8 +97,8 @@ joinEvents.post("/join", async (req: Request, res: Response) => {
                 .execute()
         }
 
-        return res.status(HttpStatusCode.CREATED)
-            .json({ join: true, event: join, users_joined : counter })
+        return res.status(HttpStatusCode.OK)
+            .json({ join: true, event: join })
 
     } catch (error) {
         return res
