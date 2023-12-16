@@ -13,26 +13,29 @@ retrieveEventById.get("/events/event", async (req: Request, res: Response) => {
 
     try {
         const event = await dataSource.query(`SELECT
-             e.event_id, 
-             e.user_id,
-             e.event_title,
-             e.event_description,
-             el.latitude,
-             el.longitude,
-             el.time_stamp,
-             jc.counter
-         FROM events AS e
-         JOIN events_location AS el
-         ON e.event_id = el.event_id
-         JOIN joined_counter AS jc
-         ON jc.event_id = e.event_id
-         WHERE e.event_id = $1`, [event_id])
+        e.event_id, 
+        e.user_id,
+        e.event_title,
+        e.event_description,
+        el.latitude,
+        el.longitude,
+        el.time_stamp,
+        COALESCE(NULL, jc.counter, 0) AS joined_users
+    FROM events AS e
+    RIGHT JOIN events_location AS el
+    ON e.event_id = el.event_id
+    LEFT JOIN joined_counter AS jc
+    ON jc.event_id = e.event_id
+    WHERE e.event_id = $1`, [event_id])
 
         logger.info(`users event \n${JSON.stringify(event, null, " ")}`)
 
+        // console.log(event[0].joi:w);
+        
+
         return res
             .status(HttpStatusCode.OK)
-            .json({ error: false, recived: "ok", event_id, event })
+            .json({ error: false, recived: "ok", joined_users: event[0].joined_users,  event_id, event })
 
 
     } catch (error) {
