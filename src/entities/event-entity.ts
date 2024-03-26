@@ -14,8 +14,11 @@ export class Events extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   event_id: string;
 
-  @Column('uuid')
+  @Column("uuid")
   user_id: string;
+
+  @Column()
+  user_name: string;
 
   @Column()
   event_title: string;
@@ -32,16 +35,16 @@ export class Events extends BaseEntity {
 
 @Entity("events_location")
 export class EventsLocations extends BaseEntity {
-  @Column('uuid')
+  @Column("uuid")
   user_id: string;
 
-  @PrimaryColumn('uuid')
+  @PrimaryColumn("uuid")
   event_id: string;
 
-  @Column('real')
+  @Column("real")
   latitude: number;
 
-  @Column('real')
+  @Column("real")
   longitude: number;
 
   @CreateDateColumn()
@@ -51,7 +54,6 @@ export class EventsLocations extends BaseEntity {
   event: Events;
 }
 
-
 @Entity("joined_events")
 export class JoinedEvents extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
@@ -60,18 +62,20 @@ export class JoinedEvents extends BaseEntity {
   @Column("uuid")
   user_id: string;
 
+  @Column()
+  user_name: string;
+
   @Column("uuid")
   event_id: string;
 
-  @Column('bool')
-  joined: boolean
+  @Column("bool")
+  joined: boolean;
 
   @OneToMany(() => EventsLocations, (ELocations) => ELocations.user_id)
-  EventsLocations: EventsLocations[]
+  EventsLocations: EventsLocations[];
 
   @OneToMany(() => Events, (events) => events.event_id)
-  Events: Events[]
-
+  Events: Events[];
 }
 
 @Entity("joined_counter")
@@ -85,10 +89,9 @@ export class JoinedCounter extends BaseEntity {
   @Column("uuid")
   event_id: string;
 
-  @Column('int', { default: 0 })
+  @Column("int", { default: 0 })
   counter: number = 0;
 
   @OneToMany(() => JoinedEvents, (JoinedEvents) => JoinedEvents.event_id)
-  JoinedEvents: JoinedEvents[]
-
+  JoinedEvents: JoinedEvents[];
 }
