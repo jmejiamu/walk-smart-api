@@ -21,6 +21,8 @@ retrieveEventById.get("/events/event", async (req: Request, res: Response) => {
         el.latitude,
         el.longitude,
         el.time_stamp,
+        jc.user_id,
+        jc.event_id,
         COALESCE(NULL, jc.counter, 0) AS joined_users
     FROM events AS e
     RIGHT JOIN events_location AS el
@@ -35,15 +37,13 @@ retrieveEventById.get("/events/event", async (req: Request, res: Response) => {
 
     // console.log(event[0].joi:w);
 
-    return res
-      .status(HttpStatusCode.OK)
-      .json({
-        error: false,
-        recived: "ok",
-        joined_users: event[0].joined_users,
-        event_id,
-        event,
-      });
+    return res.status(HttpStatusCode.OK).json({
+      error: false,
+      recived: "ok",
+      joined_users: event[0].joined_users,
+      event_id,
+      event,
+    });
   } catch (error) {
     logger.error(
       `error \n ${JSON.stringify(
