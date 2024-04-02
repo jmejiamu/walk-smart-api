@@ -21,6 +21,7 @@ export interface JoinedEvent {
   user_id?: string;
   event_id?: string;
   joined?: boolean;
+  user_name?: string;
   // time_stamp?: Date;
 }
 
