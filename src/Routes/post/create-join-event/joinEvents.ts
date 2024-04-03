@@ -124,10 +124,12 @@ joinEvents
                         e.event_description,
                         el.latitude,
                         el.longitude,
-                        e.time_stamp
+                        e.time_stamp,
+                        jec.counter
                 FROM joined_events AS je
                 JOIN events AS e ON je.event_id = e.event_id
                 JOIN events_location AS el ON je.event_id = el.event_id
+                JOIN joined_counter AS jec ON je.event_id = jec.event_id
                 WHERE je.user_id = $1`,
         [user_id]
       );
