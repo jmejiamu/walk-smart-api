@@ -4,6 +4,7 @@ import { dataSource } from "../../data-source";
 import { HttpStatusCode } from "../../utils/status-code";
 import { createJWT, hashPassword } from "../../utils/auth";
 import { logger } from "../../utils/logger";
+import { v4 as uuidv4 } from "uuid";
 
 const register = express.Router();
 
@@ -25,7 +26,6 @@ register.post("/register", async (req: Request, res: Response) => {
     const userData = dataSource.getRepository(Register);
     const existingUser = await userData.findOne({ where: { email } });
 
-
     if (existingUser) {
       return res
         .status(HttpStatusCode.BAD_REQUEST)
@@ -36,18 +36,20 @@ register.post("/register", async (req: Request, res: Response) => {
 
     const hashedPassword = await hashPassword(password);
 
-    const username = email.split('@')[0];
+    const username = email.split("@")[0];
+    const user_id = uuidv4();
 
     const register: userForm = {
       fullName,
       email,
       username,
+      user_id,
     };
 
     const user = await source.manager.save(Register, register);
 
     const signin: userForm = {
-      user_id: user.user_id,
+      user_id: user_id,
       email,
       username,
       password: hashedPassword,
@@ -56,25 +58,43 @@ register.post("/register", async (req: Request, res: Response) => {
     await source.manager.save(Signin, signin);
 
     logger.info(`New user created \n 
-      ${JSON.stringify({ record: { user_id: user.user_id, username, created: "ok", fail: false, token } }, null, " ")}`,
-    )
+      ${JSON.stringify(
+        {
+          record: {
+            user_id: user.user_id,
+            username,
+            created: "ok",
+            fail: false,
+            token,
+          },
+        },
+        null,
+        " "
+      )}`);
 
-    return res
-      .status(HttpStatusCode.CREATED)
-      .json({
-        error: false,
-        record: { user_id: user.user_id, username, created: "ok", fail: false, token },
-      });
-
+    return res.status(HttpStatusCode.CREATED).json({
+      error: false,
+      record: {
+        user_id: user.user_id,
+        username,
+        created: "ok",
+        fail: false,
+        token,
+      },
+    });
   } catch (e) {
-    logger.error(`Error register \n`,
-      JSON.stringify({ error: true, record: { created: "unable to create" } }, null, " ")
-    )
+    logger.error(
+      `Error register \n`,
+      JSON.stringify(
+        { error: true, record: { created: "unable to create" } },
+        null,
+        " "
+      )
+    );
     return res
       .status(HttpStatusCode.BAD_REQUEST)
       .json({ error: true, record: { created: "unable to create" } });
   }
-
 });
 
 export default register;
