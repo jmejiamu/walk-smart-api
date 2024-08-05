@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { HttpStatusCode } from "../../utils/status-code";
-import { authMiddleware } from "../../middleware";
+import { authMiddleware } from "../../middleware/authMiddleware";
 
 export const verifyRoute = express.Router();
 

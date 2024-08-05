@@ -13,12 +13,14 @@ import { dataSource } from "./data-source";
 import retrieveEventById from "./Routes/post/retrieve-event-by-id/retrieveEventById";
 import retrieveUserEventsByID from "./Routes/post/retrieve-user-events-by-id/retrieveUserEvents";
 import joinEvents from "./Routes/post/create-join-event/joinEvents";
+import { verifyRoute } from "./Routes/verify/verify";
 
 const app = express();
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/api-v1", verifyRoute);
 app.use("/api-v1", router);
 app.use("/api-v1", register);
 app.use("/api-v1", signin);
