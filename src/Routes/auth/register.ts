@@ -18,6 +18,9 @@ interface userForm {
 
 register.post("/register", async (req: Request, res: Response) => {
   const { fullName, email, password } = req.body;
+  console.log("🚀 ~ register.post ~ password:", password);
+  console.log("🚀 ~ register.post ~ email:", email);
+  console.log("🚀 ~ register.post ~ fullName:", fullName);
 
   try {
     const source = dataSource;
