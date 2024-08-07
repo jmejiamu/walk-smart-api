@@ -4,10 +4,11 @@ import { Event, EventLocation } from "../../../models/interfaces";
 import { dataSource } from "../../../data-source";
 import { logger } from "../../../utils/logger";
 import { HttpStatusCode } from "../../../utils/status-code";
+import { authMiddleware } from "../../../middleware/authMiddleware";
 
 const router = express.Router();
 
-router.post("/events", async (req, res) => {
+router.post("/events", authMiddleware, async (req, res) => {
   const {
     user_id,
     latitude,
