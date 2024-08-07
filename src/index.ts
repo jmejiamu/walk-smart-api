@@ -14,6 +14,7 @@ import retrieveEventById from "./Routes/post/retrieve-event-by-id/retrieveEventB
 import retrieveUserEventsByID from "./Routes/post/retrieve-user-events-by-id/retrieveUserEvents";
 import joinEvents from "./Routes/post/create-join-event/joinEvents";
 import { verifyRoute } from "./Routes/verify/verify";
+import { usersData } from "./Routes/get/users-data/users-data";
 
 const app = express();
 app.use(express.json());
@@ -29,6 +30,7 @@ app.use("/api-v1", retriveEventsById);
 app.use("/api-v1", retrieveEventById);
 app.use("/api-v1", retrieveUserEventsByID);
 app.use("/api-v1", joinEvents);
+app.use("/api-v1", usersData);
 
 app.use(express.json());
 app.use(morgan("dev"));
